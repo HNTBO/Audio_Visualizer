@@ -343,7 +343,7 @@
     navigator.mediaDevices.addEventListener('devicechange', async ()=>{ if(modeEl.value!=='mic') return; await listMics(); const values = Array.from(micSelect.options).map(o=>o.value); if(!values.includes(currentDeviceId)){ currentDeviceId='default'; micSelect.value='default'; } else { micSelect.value=currentDeviceId; } });
 
     // ---------- PRESETS (localStorage)
-    const PRESETS_KEY = 'av_presets_v1';
+    const PRESETS_KEY = 'av_presets_v2';
 
     function getCurrentVisualConfig(){
       return {
@@ -392,25 +392,15 @@
     function seedDefaultsIfEmpty(){
       const presets = readPresets();
       if (Object.keys(presets).length) { refreshPresetSelect(); return; }
-      presets["Purple 20 bars • glow"] = {
+      presets["20 bars • #83aaff"] = {
         vizMode: 'bars',
-        fg: '#a855ff', // purple
+        fg: '#83aaff',
         bg: '#0a0f15',
-        glow: 40,
+        glow: 14,
         radius: 12,
         noiseAmp: 12,
         noiseHz: 0.6,
         barsCount: 20
-      };
-      presets["White 64 bars • flat"] = {
-        vizMode: 'bars',
-        fg: '#ffffff',
-        bg: '#0a0f15',
-        glow: 0,
-        radius: 0,
-        noiseAmp: 12,
-        noiseHz: 0.6,
-        barsCount: 64
       };
       writePresets(presets);
       refreshPresetSelect();
